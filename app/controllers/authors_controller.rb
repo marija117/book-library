@@ -16,9 +16,9 @@ class AuthorsController < ApplicationController
         @author = Author.new(author_params)
 
         if @author.save
-            redirect_to @author
+          render json: @author
         else
-            render :new, status: :unprocessable_entity
+          render json: { errors: @author.errors }, status: 422 
         end
     end
   
@@ -27,16 +27,17 @@ class AuthorsController < ApplicationController
     
     def update    
         if @author.update(author_params)
-          redirect_to @author
+          render json: @author
         else
-          render :edit, status: :unprocessable_entity
+          render json: { errors: @author.errors }, status: 422 
         end
     end
   
     def destroy
+        @authors = Author.all
         @author.destroy
     
-        redirect_to root_path, status: :see_other
+        render json: @authors
     end
     
 
