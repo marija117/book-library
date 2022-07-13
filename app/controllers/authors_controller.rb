@@ -1,6 +1,7 @@
 class AuthorsController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
     before_action :set_author, only: [:show, :edit, :update, :destroy]
+    load_and_authorize_resource
 
     def index
         @authors = Author.all
