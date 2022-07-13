@@ -4,7 +4,7 @@ class Book < ApplicationRecord
   has_many :loan_records
 
   validates :title, presence: true
-  validates :number_of_hard_copies, presence: true
+  validates :number_of_hard_copies, numericality: { only_integer: true }
 
   scope :out_of_stock, -> { where number_of_hard_copies: [0, nil]}
   scope :history_of_loaned_books, lambda { |user|

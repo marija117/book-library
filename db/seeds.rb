@@ -112,7 +112,7 @@ LoanRecord.create([
         book_id: "3"
     },
     {
-        user_id: "2",
+        user_id: "3",
         book_id: "7"
     }
 ])
