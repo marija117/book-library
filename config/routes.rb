@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   end
 
   resources :loan_records
+  get "history_of_loans/", to: "loan_records#history_of_loans"
 end
