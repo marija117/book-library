@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :librarian_only, except: [:index, :show]
   before_action :get_author
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
@@ -41,6 +42,12 @@ class BooksController < ApplicationController
   end
 
   private
+
+  def librarian_only
+      unless current_user.librarian?
+          redirect_to root_url, :alert => "Access denied."
+      end
+  end
 
   def set_book
       @book = @author.books.find(params[:id]) if params[:id]

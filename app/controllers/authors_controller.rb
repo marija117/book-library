@@ -1,5 +1,6 @@
 class AuthorsController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
+    before_action :librarian_only, except: [:index, :show]
     before_action :set_author, only: [:show, :edit, :update, :destroy]
 
     def index
@@ -43,6 +44,12 @@ class AuthorsController < ApplicationController
     
 
     private
+
+    def librarian_only
+        unless current_user.librarian?
+            redirect_to root_url, :alert => "Access denied."
+        end
+    end
 
     def set_author
         @author = Author.find(params[:id]) if params[:id]
