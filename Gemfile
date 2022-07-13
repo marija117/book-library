@@ -20,6 +20,8 @@ gem "importmap-rails"
 
 # Use devise for authentication
 gem 'devise'
+gem 'cancancan'
+gem 'rolify'
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
