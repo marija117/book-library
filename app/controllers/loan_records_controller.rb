@@ -47,7 +47,8 @@ class LoanRecordsController < ApplicationController
     
     def member_can_loan_book(user_id, book_id)
         @book = Book.find(book_id)
-        @book.number_of_hard_copies > 0 && LoanRecord.number_of_loaned_books(user_id)
+        @user = User.find(user_id)
+        @book.number_of_hard_copies > 0 && LoanRecord.number_of_loaned_books(user_id) && @user.member?
     end
 
     def history_of_loans
